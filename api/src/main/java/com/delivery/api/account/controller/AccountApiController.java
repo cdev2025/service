@@ -1,4 +1,4 @@
-package com.delivery.api.account;
+package com.delivery.api.account.controller;
 
 import com.delivery.api.account.model.AccountMeResponse;
 import com.delivery.api.common.api.Api;
@@ -33,6 +33,17 @@ public class AccountApiController {
                 .email("hong@gmail.com")
                 .registeredAt(LocalDateTime.now())
                 .build();
+
+//        var str = "안녕하세요";
+//        //예외 발생 예상되는 코드를 try~catch로 감싸는데
+//        try{
+//            Integer.parseInt(str);
+//        }catch (Exception e){
+//            // catch 처리 하는게 아니라
+//            // 사용자 정의 예외 발생 시킴
+//            throw new ApiException(ErrorCode.SERVER_ERROR, e, "사용자 Me 호출시 에러 발생");
+//        }
+
         return Api.OK(response);
     }
 }

@@ -32,7 +32,7 @@ public class Api<T> {
         return api;
     }
 
-    // 에러 코드를 받아오는 경오 : 간단하게 에러코드만 넘기면 바로 처리
+    // 에러 코드를 받아오는 경우 : 간단하게 에러코드만 넘기면 바로 처리
     public static Api<Object> ERROR(ErrorCodeInterface errorCodeInterface){
         var api = new Api<Object>();
         api.result = Result.ERROR(errorCodeInterface);
@@ -40,6 +40,16 @@ public class Api<T> {
     }
 
     // 에러 코드 인터페이스와 스로워블 최상위 예외를 받아서 이것도 같이 넘겨주는방법
+    public static Api<Object> ERROR(ErrorCodeInterface errorCodeInterface, Throwable tx){
+        var api = new Api<Object>();
+        api.result = Result.ERROR(errorCodeInterface, tx);
+        return api;
+    }
 
     // 메시지를 같이 넘기는 경우
+    public static Api<Object> ERROR(ErrorCodeInterface errorCodeInterface, String description){
+        var api = new Api<Object>();
+        api.result = Result.ERROR(errorCodeInterface, description);
+        return api;
+    }
 }

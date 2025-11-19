@@ -20,6 +20,8 @@ public class LoggerFilter implements Filter {
         var req = new ContentCachingRequestWrapper((HttpServletRequest) servletRequest);
         var res = new ContentCachingResponseWrapper((HttpServletResponse) servletResponse);
 
+        log.info("INIT URI: {}", req.getRequestURI());
+
         // 필터 체인에 캐싱 래퍼로 감싼 요청과 응답 객체를 넘김.
         filterChain.doFilter(req, res);
 
@@ -46,7 +48,7 @@ public class LoggerFilter implements Filter {
         var uri = req.getRequestURI();
         var method = req.getMethod();
 
-        log.info(">>>>> uir: {}, method: {}, header: {}, body: {}", uri, method, headerValues, requestBody);
+        log.info(">>>>> uri: {}, method: {}, header: {}, body: {}", uri, method, headerValues, requestBody);
 
         // response 정보
         var responseHeaderValues = new StringBuilder();
