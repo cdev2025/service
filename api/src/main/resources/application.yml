@@ -14,7 +14,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update # 테이블 없으면 생성, 있으면 수정
+      # ddl-auto: update # 테이블 없으면 생성, 있으면 수정
+      ddl-auto: validate # 엔티티와 DB스키마의 일치 여부만 검증
     #    defer-datasource-initialization: true  # ✅ Hibernate가 테이블 만든 후 data.sql 실행
     show-sql: true
     properties:

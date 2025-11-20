@@ -1,4 +1,4 @@
-package com.delivery.api.filter;
+package com.delivery.api.common.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

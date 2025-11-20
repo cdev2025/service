@@ -1,4 +1,4 @@
-package com.delivery.api.exceptionhandler;
+package com.delivery.api.common.exceptionhandler;
 
 import com.delivery.api.common.api.Api;
 import com.delivery.api.common.exception.ApiException;

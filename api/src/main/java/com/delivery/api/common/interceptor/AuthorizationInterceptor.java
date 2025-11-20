@@ -1,4 +1,4 @@
-package com.delivery.api.interceptor;
+package com.delivery.api.common.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
