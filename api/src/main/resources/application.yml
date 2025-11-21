@@ -26,3 +26,11 @@ spring:
 #    init:
 #      mode: always        # 🚀 data.sql 실행 활성화
 #      encoding: UTF-8
+
+token:
+  secret:
+    key: SpringSecurityKey_P_ssword_http__Spring_io
+  access-token:
+    plus-hour: 1
+  refresh-token:
+    plus-hour: 12

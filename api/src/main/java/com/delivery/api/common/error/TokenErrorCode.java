@@ -2,16 +2,18 @@ package com.delivery.api.common.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 /**
- * User의 경우 1000번대 에러 코드 사용
+ * Token의 경우 2000번대 에러 코드 사용
  * */
 @AllArgsConstructor
 @Getter
-public enum UserErrorCode implements ErrorCodeInterface{
+public enum TokenErrorCode implements ErrorCodeInterface{
 
-    USER_NOT_FOUND(400, 1404, "사용자를 찾을 수 없음"),
+    INVALID_TOKEN(400, 2000, "유효하지 않은 토큰"),
+    EXPIRED_TOKEN(400, 2001, "만료된 토큰"),
+
+    TOKEN_EXCEPTION(400, 2002, "토큰 알 수 없는 에러"),
 
     // (HttpStatusCode, 우리서비스 에러코드, 코드 설명)
     // HttpStatusCode와 우리 서비스의 에러코드는 같을 수도 있고, 다를 수도 있음

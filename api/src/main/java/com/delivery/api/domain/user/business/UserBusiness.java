@@ -3,6 +3,7 @@ package com.delivery.api.domain.user.business;
 import com.delivery.api.common.annotation.Business;
 import com.delivery.api.common.error.ErrorCode;
 import com.delivery.api.common.exception.ApiException;
+import com.delivery.api.domain.user.controller.model.UserLoginRequest;
 import com.delivery.api.domain.user.controller.model.UserRegisterRequest;
 import com.delivery.api.domain.user.controller.model.UserResponse;
 import com.delivery.api.domain.user.converter.UserConverter;
@@ -51,5 +52,20 @@ public class UserBusiness {
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "request is null"));
 
  */
+    }
+
+    /**
+     * 1. email, password를 가지고 사용자 체크
+     * 2. user entity로 로그인 확인
+     * 3. token 생성 => 아직 토큰은 적용 안해서, 일단 코드로 작성
+     * 4. token response
+     * */
+    // public Object login(@Valid UserLoginRequest body) {
+    public UserResponse login(UserLoginRequest request){
+        // 1. email, password를 가지고 사용자 체크
+        var userEntity = userService.login(request.getEmail(), request.getPassword()); // 사용자가 없으면 알아서 throw
+
+        // TODO: 토큰 생성 로직으로 나중에 변경 예정
+        return userConverter.toResponse(userEntity);
     }
 }
