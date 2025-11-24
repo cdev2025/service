@@ -3,6 +3,8 @@ package com.delivery.api.domain.user.business;
 import com.delivery.api.common.annotation.Business;
 import com.delivery.api.common.error.ErrorCode;
 import com.delivery.api.common.exception.ApiException;
+import com.delivery.api.domain.token.business.TokenBusiness;
+import com.delivery.api.domain.token.controller.model.TokenResponse;
 import com.delivery.api.domain.user.controller.model.UserLoginRequest;
 import com.delivery.api.domain.user.controller.model.UserRegisterRequest;
 import com.delivery.api.domain.user.controller.model.UserResponse;
@@ -20,6 +22,8 @@ public class UserBusiness {
     private final UserService userService;
 
     private  final UserConverter userConverter;
+
+    private final TokenBusiness tokenBusiness;
 
     /**
      * 사용자에 대한 가입 처리 로직
@@ -61,11 +65,19 @@ public class UserBusiness {
      * 4. token response
      * */
     // public Object login(@Valid UserLoginRequest body) {
-    public UserResponse login(UserLoginRequest request){
+    public TokenResponse login(UserLoginRequest request){
         // 1. email, password를 가지고 사용자 체크
         var userEntity = userService.login(request.getEmail(), request.getPassword()); // 사용자가 없으면 알아서 throw
 
         // TODO: 토큰 생성 로직으로 나중에 변경 예정
-        return userConverter.toResponse(userEntity);
+        var tokenResponse = tokenBusiness.issueToken(userEntity);
+
+        return tokenResponse;
+    }
+
+    public UserResponse me(Long userId) {
+        var userEntity = userService.getUserWithThrow(userId);
+        var response = userConverter.toResponse(userEntity);
+        return response;
     }
 }

@@ -48,6 +48,14 @@ public class UserService {
         ).orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUND));
     }
 
+    // overloading
+    public UserEntity getUserWithThrow(Long userId){
+        return userRepository.findFirstByIdAndStatusOrderByIdDesc(
+                userId,
+                UserStatus.REGISTERD
+        ).orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUND));
+    }
+
     // 1. login 로직 처리하면서,
     public UserEntity login(
             String email,

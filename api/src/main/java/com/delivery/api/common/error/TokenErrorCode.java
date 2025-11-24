@@ -15,6 +15,8 @@ public enum TokenErrorCode implements ErrorCodeInterface{
 
     TOKEN_EXCEPTION(400, 2002, "토큰 알 수 없는 에러"),
 
+    AUTHORIZATION_TOKEN_NOT_FOUND(400, 2003, "인증 헤더에 토큰 없음"),
+
     // (HttpStatusCode, 우리서비스 에러코드, 코드 설명)
     // HttpStatusCode와 우리 서비스의 에러코드는 같을 수도 있고, 다를 수도 있음
     // 기본적으로 같이 쓰되, 우리쪽에서 에러난 코드는 세분화하도록 합니다.
