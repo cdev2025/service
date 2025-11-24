@@ -2,8 +2,10 @@ package com.delivery.api.config.web;
 
 
 import com.delivery.api.common.interceptor.AuthorizationInterceptor;
+import com.delivery.api.common.resolver.UserSessionResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -14,6 +16,7 @@ import java.util.List;
 public class WebConfig implements WebMvcConfigurer {
 
     private final AuthorizationInterceptor authorizationInterceptor;
+    private final UserSessionResolver userSessionResolver;
 
     /**
      * [우리 서비스에서 정한 인증 규칙] => 규칙을 정해서 룰을 적용
@@ -43,5 +46,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns(DEFAULT_EXCLUDE)
                 .excludePathPatterns(SWAGGER)
         ;
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(userSessionResolver);
     }
 }

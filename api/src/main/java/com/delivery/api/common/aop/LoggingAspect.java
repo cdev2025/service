@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect {
 
-/*    @Around("execution(* com.delivery.api..controller..*(..)) || " +
+   @Around("execution(* com.delivery.api..controller..*(..)) || " +
             "execution(* com.delivery.api..business..*(..)) || " +
             "execution(* com.delivery.api..service..*(..)) || "
-    )*/
-    @Around("execution(* com.delivery.api..controller..*(..))")
+    )
+    //@Around("execution(* com.delivery.api..controller..*(..))")
     public Object logging(ProceedingJoinPoint pjp) throws Throwable{
 
         String method = pjp.getSignature().toShortString();
