@@ -1,5 +1,6 @@
 # service
 
+```mermaid
 erDiagram
 USER {
 BIGINT id PK "NOT NULL, AUTO_INCREMENT"
@@ -38,3 +39,4 @@ DATETIME last_login_at
     }
 
     STORE ||--o{ STORE_MENU : "store_id"
+```
