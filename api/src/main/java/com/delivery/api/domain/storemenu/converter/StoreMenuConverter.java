@@ -9,6 +9,7 @@ import com.delivery.db.storemenu.StoreMenuEntity;
 import com.delivery.db.storemenu.enums.StoreMenuStatus;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Converter
@@ -48,5 +49,14 @@ public class StoreMenuConverter {
                             .build();
                 })
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+    }
+
+    // entity list를 받아서, response list로 바꿔주는 toResponse 메서드
+    public List<StoreMenuResponse> toResponse(
+            List<StoreMenuEntity> list
+    ){
+        return list.stream()
+                .map(this::toResponse)
+                .toList();
     }
 }

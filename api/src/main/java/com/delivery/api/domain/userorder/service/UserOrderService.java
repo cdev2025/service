@@ -27,6 +27,15 @@ public class UserOrderService {
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
     }
 
+    // 주문 조회 : 특정 유저의 특정 주문
+    public UserOrderEntity getUserOrderWithoutStatusWithThrow(
+            Long id, // 주문 id (user_order의 id)
+            Long userId
+    ){
+        return userOrderRepository.findAllByIdAndUserId(id, userId)
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+    }
+
     // 주문 조회 : 특정 유저의 모든 주문
     public List<UserOrderEntity> getUserOrderList(Long userId){
         return userOrderRepository.findAllByUserIdAndStatusOrderByIdDesc(userId, UserOrderStatus.REGISTERED);
@@ -37,9 +46,29 @@ public class UserOrderService {
         return userOrderRepository.findAllByUserIdAndStatusInOrderByIdDesc(userId,  statusList);
     }
 
-    // TODO: 혅재 진행 중인 주문 내역
+    // 혅재 진행 중인 주문 내역
+    public List<UserOrderEntity> current(Long userId){
+        return getUserOrderList(
+                userId,
+                List.of(
+                        UserOrderStatus.ORDER,
+                        UserOrderStatus.ACCEPT,
+                        UserOrderStatus.COOKING,
+                        UserOrderStatus.DELIVERY
+                )
+        );
+    }
 
-    // TODO: 과거 주문한 내역
+    // 과거 주문한 내역
+    public List<UserOrderEntity> history(Long userId){
+        return getUserOrderList(
+                userId,
+                List.of(
+                        UserOrderStatus.UNREGISTERED,
+                        UserOrderStatus.RECEIVE
+                )
+        );
+    }
 
     // 주문 (create)
     public UserOrderEntity order(
@@ -47,7 +76,7 @@ public class UserOrderService {
     ){
         return Optional.ofNullable(userOrderEntity)
                 .map(it -> {
-                    it.setStatus(UserOrderStatus.REGISTERED);
+                    it.setStatus(UserOrderStatus.ORDER);
                     it.setOrderedAt(LocalDateTime.now());
                     return userOrderRepository.save(it);
                 })
