@@ -13,7 +13,7 @@ public class LoggingAspect {
 
    @Around("execution(* com.delivery.api..controller..*(..)) || " +
             "execution(* com.delivery.api..business..*(..)) || " +
-            "execution(* com.delivery.api..service..*(..)) || "
+            "execution(* com.delivery.api..service..*(..))"
     )
     //@Around("execution(* com.delivery.api..controller..*(..))")
     public Object logging(ProceedingJoinPoint pjp) throws Throwable{
